@@ -1,0 +1,49 @@
+Aim: Arduino Uno GPS Module Interfacing
+
+Components: Arduino Uno, 16x2 I2C LCD Display, Jumper Wires
+
+
+Theory:
+
+
+code
+
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+char text2[] = "$GPGGA,134658.00,5106.9792,N,11402.3003,W,2,09,1.0,1048.47,M,-16.27,M,08,AAAA*6F";
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop() {
+  
+  char buffer[100];
+  strcpy(buffer, text2);
+  
+  char *token = strtok(buffer, ",");
+  int field = 0;
+  String lat, latDir, lon, lonDir;
+  
+  while (token != NULL) {
+    field++;
+    if (field == 3) lat = token;
+    if (field == 4) latDir = token;
+    if (field == 5) lon = token;
+    if (field == 6) lonDir = token;
+    token = strtok(NULL, ",");
+  }
+  
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Lat: " + lat + " " + latDir);
+  lcd.setCursor(0, 1);
+  lcd.print("Lon: " + lon + " " + lonDir);
+  
+  delay(3000);
+}
