@@ -1,0 +1,49 @@
+Aim: Displaying different LED patterns with Arduino.
+
+Components: Arduino Uno Board,Breadboard,LEDs, Resistors (220 ohm) ,Jumper Wires.
+
+Theory: LED (Light Emitting Diode) is a semiconductor device that emits light when an electric
+current passes through it. Unlike regular bulbs, LEDs are energy-efficient and produce little
+heat.In Arduino projects, LEDs are commonly used to:
+● Indicate status (on/off)
+● Display patterns
+● Provide visual feedback
+An LED has two legs:
+● Anode (+) – longer leg, connected to positive voltage (Arduino pin)
+● Cathode (–) – shorter leg, connected to ground
+A current-limiting resistor (e.g., 220 ohms) is always used in series to protect the LED from
+excessive current.
+
+
+code
+
+void setup()
+{
+    pinMode(13, OUTPUT);
+    pinMode(12, OUTPUT);
+    pinMode(11, OUTPUT);
+}
+
+void loop()
+{
+    digitalWrite(13, HIGH);
+    delay(1000); // Wait for 1000 millisecond(s)
+    digitalWrite(13, LOW);
+    delay(1000); // Wait for 1000 millisecond(s)
+    digitalWrite(12, HIGH);
+    delay(1000); // Wait for 1000 millisecond(s)
+    digitalWrite(12, LOW);
+    delay(1000); // Wait for 1000 millisecond(s)
+    digitalWrite(11, HIGH);
+    delay(1000); // Wait for 1000 millisecond(s)
+    digitalWrite(11, LOW);
+    delay(1000); // Wait for 1000 millisecond(s)
+}
+
+
+
+
+
+
+
+
