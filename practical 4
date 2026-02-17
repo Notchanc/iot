@@ -1,0 +1,30 @@
+AIM: Implement Arduino Uno Based Oscilloscope.
+
+Components: Arduino Uno board, Potentiometer, Breadboard, Jumper Wires
+
+Theory: An oscilloscope is an electronic measuring instrument used to observe and
+analyze electrical signals. It displays a graph of voltage (Y-axis) versus time (X-axis),
+allowing users to see how signals change over time.
+Oscilloscopes are essential for:
+● Measuring signal amplitude and frequency
+● Observing waveform shapes (sine, square, triangular)
+● Detecting noise or unexpected variations
+● Debugging electronic circuits
+
+code
+
+
+void setup() {
+  Serial.begin(9600);  //Starts serial communication at 9600 baud, so the
+                       //Arduino can send data to your computer (Serial Monitor).
+}
+
+void loop() {
+  int value = analogRead(A0);  //Reads the voltage on analog pin A0
+  
+  Serial.println(value);       //Sends the reading to the Serial Monitor so you can
+                               //see the value
+  
+  delay(10);                   //Waits 10 milliseconds, so you get about 100 readings per
+                               //second.
+}
