@@ -1,0 +1,45 @@
+AIM: Fingerprint Sensor interfacing with Arduino UNO.
+
+Components: Arduino UNO R3, LED,16x2 LCD Display, Resistor (220 Ohm), Jumper
+Wires.
+
+Theory:
+
+
+code
+
+
+#include <LiquidCrystal_I2C.h>
+
+int ledPin = 13;
+String inputString = "";
+String validFingerprint = "4444";
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup() {
+  lcd.init();
+  lcd.backlight();
+  
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Place Finger (enter Fingerprint ID):");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    inputString = Serial.readStringUntil('\n');
+    inputString.trim();
+    
+    if (inputString == validFingerprint) {
+      digitalWrite(ledPin, HIGH);
+      Serial.println("Access Granted, Fingerprint Matched");
+      lcd.print("Access Granted");
+    }
+    else {
+      digitalWrite(ledPin, LOW);
+      Serial.println("Access Denied, Invalid Fingerprint");
+      lcd.print("Access Denied");
+    }
+    
+  }
+}
