@@ -1,0 +1,33 @@
+AIM: Interfacing Arduino with RFID.
+
+Components: Arduino UNO R3, LED, Resistor (220 Ohm), Jumper Wires.
+
+
+code
+
+
+int ledpin = 13;
+String input = "";
+String validUID = "4444";
+
+void setup() {
+  pinMode(ledpin, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Enter the UID (Scanning RFID Card):");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    input = Serial.readStringUntil('\n');
+    input.trim();
+    
+    if (input == validUID) {
+      digitalWrite(ledpin, HIGH);
+      Serial.println("Access Granted");
+    }
+    else {
+      digitalWrite(ledpin, LOW);
+      Serial.println("Access Denied");
+    }
+  }
+}
