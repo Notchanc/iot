@@ -1,0 +1,38 @@
+AIM: Controlling Arduino UNO with WhatsApp.
+
+Components: Arduino UNO R3, LED, Resistor (220 Ohm), Jumper Wires.
+
+Theory:
+
+
+code
+
+int ledPin = 13;
+String inputString = "";
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Type LED ON or LED OFF (simulating WhatsApp message)");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    
+    inputString = Serial.readStringUntil('\n');
+    inputString.trim();
+    
+    if (inputString == "LED ON") {
+      digitalWrite(ledPin, HIGH);
+      Serial.println("LED is ON (Message received)");
+    }
+    else if (inputString == "LED OFF") {
+      digitalWrite(ledPin, LOW);
+      Serial.println("LED is OFF (Message received)");
+    }
+    else {
+      Serial.println("Unknown command");
+    }
+    
+  }
+}
